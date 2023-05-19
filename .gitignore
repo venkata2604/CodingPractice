@@ -50,3 +50,4 @@ rsconnect/
 
 # large Datafiles
 Dataset/
+*.zip
