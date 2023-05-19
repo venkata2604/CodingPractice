@@ -51,3 +51,7 @@ rsconnect/
 # large Datafiles
 Dataset/
 *.zip
+
+# All ipynb and IDE binary files
+.ipynb_checkpoints
+.idea
