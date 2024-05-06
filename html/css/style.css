@@ -1,0 +1,36 @@
+.chart {
+    width: 400px;
+    height: 200px;
+    background-color: #f0f0f0;
+    display: flex;
+  }
+  
+  .bar {
+    flex: 1;
+    height: 100%;
+  }
+  
+  .six-sigma {
+    background-color: green;
+  }
+  
+  .five-sigma {
+    background-color: lime;
+  }
+  
+  .four-sigma {
+    background-color: yellow;
+  }
+  
+  .three-sigma {
+    background-color: orange;
+  }
+  
+  .two-sigma {
+    background-color: red;
+  }
+  
+  .one-sigma {
+    background-color: darkred;
+  }
+  
