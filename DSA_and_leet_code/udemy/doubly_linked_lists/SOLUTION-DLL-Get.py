@@ -1,10 +1,12 @@
+
 class Node:
     def __init__(self, value):
         self.value = value
         self.next = None
+        self.prev = None
         
 
-class LinkedList:
+class DoublyLinkedList:
     def __init__(self, value):
         new_node = Node(value)
         self.head = new_node
@@ -19,11 +21,12 @@ class LinkedList:
         
     def append(self, value):
         new_node = Node(value)
-        if self.length == 0:
+        if self.head is None:
             self.head = new_node
             self.tail = new_node
         else:
             self.tail.next = new_node
+            new_node.prev = self.tail
             self.tail = new_node
         self.length += 1
         return True
@@ -31,17 +34,15 @@ class LinkedList:
     def pop(self):
         if self.length == 0:
             return None
-        temp = self.head
-        pre = self.head
-        while temp.next:
-            pre = temp
-            temp = temp.next
-        self.tail = pre
-        self.tail.next = None
-        self.length -= 1
-        if self.length == 0:
+        temp = self.tail
+        if self.length == 1:
             self.head = None
-            self.tail = None
+            self.tail = None 
+        else:       
+            self.tail = self.tail.prev
+            self.tail.next = None
+            temp.prev = None
+        self.length -= 1
         return temp
 
     def prepend(self, value):
@@ -51,6 +52,7 @@ class LinkedList:
             self.tail = new_node
         else:
             new_node.next = self.head
+            self.head.prev = new_node
             self.head = new_node
         self.length += 1
         return True
@@ -59,59 +61,51 @@ class LinkedList:
         if self.length == 0:
             return None
         temp = self.head
-        self.head = self.head.next
-        temp.next = None
-        self.length -= 1
-        if self.length == 0:
+        if self.length == 1:
+            self.head = None
             self.tail = None
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+            temp.next = None      
+        self.length -= 1
         return temp
 
     def get(self, index):
         if index < 0 or index >= self.length:
             return None
         temp = self.head
-        for _ in range(index):
-            temp = temp.next
+        if index < self.length/2:
+            for _ in range(index):
+                temp = temp.next
+        else:
+            temp = self.tail
+            for _ in range(self.length - 1, index, -1):
+                temp = temp.prev  
         return temp
-        
-    ## WRITE SET_VALUE METHOD HERE ##
-    def set_value(self, index, value):
-        temp = self.get(index)
-        if temp:
-            temp.value = value
-            return True
-        return False
-    
 
 
 
-my_linked_list = LinkedList(11)
-my_linked_list.append(3)
-my_linked_list.append(23)
-my_linked_list.append(7)
 
-print('LL before set_value():')
-my_linked_list.print_list()
+my_doubly_linked_list = DoublyLinkedList(0)
+my_doubly_linked_list.append(1)
+my_doubly_linked_list.append(2)
+my_doubly_linked_list.append(3)
 
-my_linked_list.set_value(1,4)
+print('Get node from first half of DLL:')
+print(my_doubly_linked_list.get(1).value)
 
-print('\nLL after set_value():')
-my_linked_list.print_list()
-
+print('\nGet node from second half of DLL:')
+print(my_doubly_linked_list.get(2).value)
 
 
 """
     EXPECTED OUTPUT:
     ----------------
-    LL before set_value():
-    11
-    3
-    23
-    7
+    Get node from first half of DLL:
+    1
 
-    LL after set_value():
-    11
-    4
-    23
-    7
+    Get node from second half of DLL:
+    2
+
 """

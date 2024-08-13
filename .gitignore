@@ -51,8 +51,12 @@ rsconnect/
 # large Datafiles
 Dataset/
 *.zip
+"/statistics/Josh Starmer - The StatQuest illustrated guide to machine learning!!! (2022).pdf"
+*.pdf
+
 
 # All ipynb and IDE binary files
 .ipynb_checkpoints
 .idea
 .git
+
